@@ -27,13 +27,25 @@ variable "instance_name" {
 
 # Create S3 bucket
 resource "aws_s3_bucket" "s3_bucket" {
-  bucket = var.bucket_name
+  bucket = "team_dkr_bucket"
 
   tags = {
-    Name = var.bucket_name
+    Name   = "team_dkr_bucket"
     Cohort = "mar-2024-cloud-engineering"
   }
 }
+
+resource "aws_s3_bucket_versioning" "versioning_enabled" {
+  bucket = "team_dkr_bucket"
+  versioning_configuration {
+    status = "Enabled"
+  }
+}
+
+# versioning {
+#     enabled = true
+#   }
+# }
 
 # Create EC2 instance (resource just gives editable descriptor name for resources)
 resource "aws_instance" "app_server" {
@@ -41,7 +53,7 @@ resource "aws_instance" "app_server" {
   instance_type = "t2.micro"
 
   tags = {
-    Name = var.instance_name
+    Name   = "team_dkr_instance"
     Cohort = "mar-2024-cloud-engineering"
   }
 }
