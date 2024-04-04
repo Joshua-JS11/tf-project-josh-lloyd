@@ -1,4 +1,5 @@
 # Sets terraform version and AWS provider version
+
 terraform {
   required_providers {
     aws = {
@@ -32,6 +33,7 @@ resource "aws_s3_bucket" "my-bucket" {
 
 # Creates instance, name of variable set through variables.tf
 # info stored in variable set in .tfvars
+
 resource "aws_instance" "app_server" {
   ami           = "ami-0648ea225c13e0729"
   instance_type = "t2.micro"
