@@ -1,19 +1,26 @@
-name: Terraform Plan and Apply
+name: Terraform Installation
+
 on:
-  pull_request:
-    branches:
-      - main
   push:
-     branches:
+    branches:
       - main
 
 jobs:
   terraform:
+    name: Install Terraform
     runs-on: ubuntu-latest
 
     steps:
+      - name: Checkout Git Repository
+        uses: actions/checkout@v3
+
+      - name: Install Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: ">= 1.2.0"
+
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v2   
 
       - name: Terraform Init
         run: terraform init
